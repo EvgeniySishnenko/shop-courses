@@ -1,0 +1,10 @@
+.nav-wrapper {
+  padding: 0 8px;
+}
+.auth {
+  margin-top: 20px;
+}
+.avatar {
+  max-width: 200px;
+  height: auto;
+}

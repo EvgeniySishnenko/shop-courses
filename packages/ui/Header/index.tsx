@@ -5,7 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import navList from "@packages/Header/consts/navbar.const";
+import navList from "@packages/ui/Header/consts/navbar.const";
 import Link from "next/link";
 import { NavLink } from "./elements";
 
@@ -23,9 +23,9 @@ export const Header = () => {
             LOGO
           </Typography>
           <Box sx={{ display: "flex" }}>
-            {navList.map((page) => (
-              <Link href={page.link} key={page.title}>
-                <NavLink>{page.title}</NavLink>
+            {navList.map(({ link, title }) => (
+              <Link href={link} key={title}>
+                <NavLink>{title}</NavLink>
               </Link>
             ))}
             <Button sx={{ color: "white", textTransform: "none" }}>

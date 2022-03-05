@@ -20,6 +20,11 @@
       "@packages/*": ["packages/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "packages/Courses/CardCourses"
+  ],
   "exclude": ["node_modules"]
 }

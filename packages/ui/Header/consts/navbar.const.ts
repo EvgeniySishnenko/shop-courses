@@ -5,7 +5,7 @@ export default [
   },
   {
     title: "Курсы",
-    link: "/corses",
+    link: "/courses",
   },
   {
     title: "Добавить курс",

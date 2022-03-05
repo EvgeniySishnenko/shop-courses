@@ -1,6 +1,18 @@
 import type { NextPage } from "next";
+import Layout from "@packages/ui/Layout";
+import { Typography } from "@mui/material";
+
 const Home: NextPage = () => {
-  return <div>Home</div>;
+  return (
+    <Layout title="Главная">
+      <Typography variant="h3" component="div" gutterBottom>
+        Магазин курсов
+      </Typography>
+      <Typography component="div" gutterBottom>
+        Перейдите в раздел курсов
+      </Typography>
+    </Layout>
+  );
 };
 
 export default Home;

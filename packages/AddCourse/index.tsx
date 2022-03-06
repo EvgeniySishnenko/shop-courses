@@ -1,16 +1,14 @@
 import Layout from "@packages/ui/Layout";
 import { Typography } from "@mui/material";
-import { CardCourses } from "./CardCourses";
+import { Form } from "./Form";
 
-const CoursesContainer = () => {
+export const AddCourseContainer = () => {
   return (
-    <Layout title="Курсы">
+    <Layout title="Добавление курса">
       <Typography variant="h4" component="div" gutterBottom>
-        Курсы
+        Добавление курса
       </Typography>
-      <CardCourses />
+      <Form />
     </Layout>
   );
 };
-
-export default CoursesContainer;

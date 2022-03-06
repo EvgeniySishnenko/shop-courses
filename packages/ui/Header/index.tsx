@@ -31,6 +31,9 @@ export const Header = () => {
             <Button sx={{ color: "white", textTransform: "none" }}>
               Выйти
             </Button>
+            <Link href={"/auth/login"}>
+              <NavLink>Вход</NavLink>
+            </Link>
           </Box>
         </Toolbar>
       </Container>

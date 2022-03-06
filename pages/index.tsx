@@ -5,7 +5,7 @@ import { Typography } from "@mui/material";
 const Home: NextPage = () => {
   return (
     <Layout title="Главная">
-      <Typography variant="h3" component="div" gutterBottom>
+      <Typography variant="h4" component="div" gutterBottom>
         Магазин курсов
       </Typography>
       <Typography component="div" gutterBottom>

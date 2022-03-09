@@ -3,7 +3,7 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 
 exports.registerValidators = [
-  body("remail")
+  body("email")
     .isEmail()
     .withMessage("Введите корректный Email")
     .custom(async (value, { req }) => {
@@ -19,16 +19,16 @@ exports.registerValidators = [
     })
     .normalizeEmail(),
 
-  body("rname", "Минимум 3 символа").isLength({ min: 3 }).trim(),
+  body("name", "Минимум 3 символа").isLength({ min: 3 }).trim(),
   body("confirm")
     .custom((value, { req }) => {
-      if (value !== req.body.rpassword) {
+      if (value !== req.body.password) {
         throw new Error("Пароли должны совпадать");
       }
       return true;
     })
     .trim(),
-  body("rpassword", "Длинна от 6 до 56").isLength({ min: 6, max: 56 }).trim(),
+  body("password", "Длинна от 6 до 56").isLength({ min: 6, max: 56 }).trim(),
 ];
 
 exports.loginValidators = [

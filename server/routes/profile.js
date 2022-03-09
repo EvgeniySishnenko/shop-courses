@@ -5,11 +5,8 @@ const User = require("../models/user");
 const router = Router();
 
 router.get("/", auth, async (req, res) => {
-  res.render("profile", {
-    title: "Profile",
-    isProfile: true,
-    user: req.user.toObject(),
-  });
+  const user = await User.findOne({ email: req.user.email });
+  return res.json(user);
 });
 
 router.post("/", auth, async (req, res) => {

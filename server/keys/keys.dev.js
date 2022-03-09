@@ -1,6 +1,12 @@
 module.exports = {
   MONGODB_URI: `mongodb+srv://evgeniy:NILYcJIsywVlRkRW@cluster0.6qn53.mongodb.net/shop`,
   SESSION_SECRET: "some secret value",
-  UNISENDER_API_KEY: "6w9761b9kc5bhzccz8q7teaeiuwkmo7p1gcc1ako",
   BASE_URL: "http://localhost:3000",
+  JWT_ACCESS_SECRET: "6w9761b9kc5bhzccz8q7teaeiuwkmo7p1gcc1ako",
+  JWT_REFRESH_SECRET: "ASDF345432GDSGDFfdghfdghfaeiuwkmo7p1gcc1ako",
+  SMTP_HOST: "smtp.yandex.ru",
+  SMTP_PORT: 465,
+  SMTP_USER: "sticky.sisters@yandex.ru",
+  SMTP_PASS: "Million2017",
+  API_URL: "http://localhost:5000",
 };

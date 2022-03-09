@@ -3,12 +3,13 @@ const keys = require("../keys");
 const nodemailer = require("nodemailer");
 const regEmail = require("../emails/registration");
 const resetEmail = require("../emails/reset");
-const { validationResult } = require("express-validator/check");
 const bcrypt = require("bcryptjs");
 const User = require("../models/user");
 const crypto = require("crypto"); // усстнавливать не нужно, встроена в nodjs
-const router = new Router();
 const { registerValidators, loginValidators } = require("../utils/validators");
+const UserController = require("../controllers/user-controller");
+
+const router = new Router();
 
 let transporter = nodemailer.createTransport({
   host: "smtp.yandex.ru",
@@ -19,67 +20,10 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-router.get("/login", async (req, res) => {
-  res.render("auth/login", {
-    title: "Авторизация",
-    isLOgin: true,
-    registerError: req.flash("registerError"),
-    loginError: req.flash("loginError"),
-  });
-});
+router.get("/logout", UserController.logout);
+router.post("/login", loginValidators, UserController.login);
 
-router.get("/logout", async (req, res) => {
-  req.session.destroy(() => {
-    res.redirect("/auth/login#login");
-  });
-});
-
-router.post("/login", loginValidators, async (req, res) => {
-  try {
-    const { email, password } = req.body;
-
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      req.flash("loginError", errors.array()[0].msg);
-      return res.status(422).redirect("./login#login");
-    }
-    const condidate = await User.findOne({ email });
-    req.session.user = condidate;
-    req.session.isAuthenticated = true;
-    req.session.save((err, user) => {
-      if (err) throw err;
-      res.redirect("/");
-    });
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-router.post("/register", registerValidators, async (req, res) => {
-  try {
-    const { remail, rpassword, rname } = req.body;
-
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      req.flash("registerError", errors.array()[0].msg);
-      return res.status(422).redirect("./login#register");
-    }
-    const hashPassword = await bcrypt.hash(rpassword, 10);
-    const user = new User({
-      email: remail,
-      password: hashPassword,
-      name: rname,
-      card: { items: [] },
-    });
-    await user.save();
-
-    let result = await transporter.sendMail(regEmail(remail));
-
-    res.redirect("/auth/login#login");
-  } catch (error) {
-    console.log(error);
-  }
-});
+router.post("/register", registerValidators, UserController.registration);
 
 router.get("/reset", (req, res) => {
   res.render("auth/reset", {
@@ -160,5 +104,8 @@ router.post("/password", async (req, res) => {
     console.log(error);
   }
 });
+
+router.get("/activate/:link", UserController.activate);
+router.get("/refresh", UserController.refresh);
 
 module.exports = router;

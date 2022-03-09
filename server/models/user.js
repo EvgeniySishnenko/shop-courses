@@ -1,9 +1,11 @@
 const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema({
-  email: { type: String, require: true },
+  email: { type: String, unique: true, required: true },
   name: String,
-  password: { type: String, require: true },
+  password: { type: String, required: true },
+  isActivated: { type: Boolean, default: false },
+  activationLink: { type: String },
   avatarUrl: String,
   resetToken: String,
   resetTokenExp: Date,

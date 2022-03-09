@@ -17,7 +17,9 @@
     "baseUrl": ".",
     "paths": {
       "@pages/*": ["pages/*"],
-      "@packages/*": ["packages/*"]
+      "@packages/*": ["packages/*"],
+      "@core/*": ["core/*"],
+      "@shared/*": ["shared/*"]
     }
   },
   "include": [

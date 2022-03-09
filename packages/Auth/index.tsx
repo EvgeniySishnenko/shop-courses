@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { Typography } from "@mui/material";
 import Layout from "@packages/ui/Layout";
-import { Form } from "./Form";
+import { Login } from "./Login";
 
 const page: { [key: string]: "Авторицация" | "Регистрация" } = {
   login: "Авторицация",
@@ -20,7 +20,7 @@ export const AuthContainer = () => {
       <Typography variant="h4" component="div" gutterBottom>
         {title}
       </Typography>
-      <Form />
+      {slug === "login" && <Login />}
     </Layout>
   );
 };

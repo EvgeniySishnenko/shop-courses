@@ -5,7 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import navList from "@packages/ui/Header/consts/navbar.const";
+import navList from "@modules/ui/Header/consts/navbar.const";
 import Link from "next/link";
 import { NavLink } from "./elements";
 

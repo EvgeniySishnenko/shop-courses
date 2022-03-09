@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import GlobalStyle from "theme/GlobalStyle";
-import { Header } from "@packages/ui/Header";
+import { Header } from "@modules/ui/Header";
 import { Container } from "@mui/material";
 
 function MyApp({ Component, pageProps }: AppProps) {

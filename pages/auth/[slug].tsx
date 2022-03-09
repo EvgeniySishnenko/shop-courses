@@ -1,4 +1,4 @@
-import { AuthContainer } from "@packages/Auth";
+import { AuthContainer } from "@modules/Auth";
 
 const Auth = () => {
   return <AuthContainer />;

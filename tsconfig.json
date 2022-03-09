@@ -17,7 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@pages/*": ["pages/*"],
-      "@packages/*": ["packages/*"],
+      "@modules/*": ["modules/*"],
       "@core/*": ["core/*"],
       "@shared/*": ["shared/*"]
     }
@@ -26,7 +26,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "packages/Courses/CardCourses"
+    "modules/Courses/CardCourses"
   ],
   "exclude": ["node_modules"]
 }

@@ -1,4 +1,4 @@
-import { ProfileContainer } from "@packages/Profile";
+import { ProfileContainer } from "@modules/Profile";
 
 const Profile = () => {
   return <ProfileContainer />;

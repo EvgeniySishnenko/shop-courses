@@ -1,4 +1,4 @@
-import CoursesContainer from "@packages/Courses";
+import CoursesContainer from "@modules/Courses";
 
 const Courses = () => {
   return <CoursesContainer />;

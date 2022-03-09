@@ -1,4 +1,4 @@
-import { IUser } from "@packages/Profile/models/interfaces";
+import { IUser } from "@modules/Profile/models/interfaces";
 
 export interface AuthRespons {
   accessToken: string;

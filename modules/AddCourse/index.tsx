@@ -1,4 +1,4 @@
-import Layout from "@packages/ui/Layout";
+import Layout from "@modules/ui/Layout";
 import { Typography } from "@mui/material";
 import { Form } from "./Form";
 

@@ -1,3 +1,4 @@
+import { AuthResponse } from "@core/models/respons/AuthResponse";
 import axios, { AxiosRequestConfig } from "axios";
 
 export const API_URL = "http://localhost:5000";
@@ -13,5 +14,27 @@ api.interceptors.request.use((config: AxiosRequestConfig) => {
     return config;
   }
 });
+api.interceptors.request.use(
+  (config) => {
+    return config;
+  },
+  async (err) => {
+    const originalRequest = err.config;
 
+    if (err.response.status == 401 && err.config && !err.config._isRety) {
+      originalRequest._isRety = true;
+      try {
+        const response = await axios.get<AuthResponse>(
+          `${API_URL}/auth/refresh`,
+          { withCredentials: true }
+        );
+        localStorage.setItem("token", response.data.accessToken);
+        return api.request(originalRequest);
+      } catch (error) {
+        console.log("Не авторизован");
+      }
+    }
+    throw err;
+  }
+);
 export default api;

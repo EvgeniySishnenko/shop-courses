@@ -1,5 +1,7 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { NextSeo } from "next-seo";
+import { useAppDispatch } from "@core/hooks/redux";
+import { refresh } from "@modules/auth/reducer/actions";
 
 interface IProps {
   children?: ReactNode;
@@ -7,6 +9,12 @@ interface IProps {
 }
 
 const Layout = ({ children, title }: IProps): JSX.Element => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) dispatch(refresh());
+  }, []);
+
   return (
     <>
       <NextSeo title={title} />

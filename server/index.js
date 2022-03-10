@@ -31,7 +31,12 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(
+  cors({
+    credentials: true,
+    origin: keys.BASE_URL,
+  })
+);
 
 app.use("/auth", authRouts);
 app.use("/profile", profileRouts);

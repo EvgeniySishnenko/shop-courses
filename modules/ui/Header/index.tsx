@@ -8,8 +8,16 @@ import Button from "@mui/material/Button";
 import navList from "@modules/ui/Header/consts/navbar.const";
 import Link from "next/link";
 import { NavLink } from "./elements";
+import { useAppDispatch } from "@core/hooks/redux";
+import { logout } from "@modules/auth/reducer/actions";
 
 export const Header = () => {
+  const dispatch = useAppDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -28,7 +36,10 @@ export const Header = () => {
                 <NavLink>{title}</NavLink>
               </Link>
             ))}
-            <Button sx={{ color: "white", textTransform: "none" }}>
+            <Button
+              onClick={handleLogout}
+              sx={{ color: "white", textTransform: "none" }}
+            >
               Выйти
             </Button>
             <Link href={"/auth/login"}>

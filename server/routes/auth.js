@@ -20,7 +20,7 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-router.get("/logout", UserController.logout);
+router.post("/logout", UserController.logout);
 router.post("/login", loginValidators, UserController.login);
 
 router.post("/register", registerValidators, UserController.registration);

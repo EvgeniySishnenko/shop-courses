@@ -13,4 +13,5 @@ export interface IUser {
   resetToken: string;
   resetTokenExp: Date;
   cart: ICart;
+  id: string;
 }

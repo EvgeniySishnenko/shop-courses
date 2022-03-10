@@ -17,7 +17,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <Provider store={store}>
         <GlobalStyle />
-
         <Header />
         <Container maxWidth="sm">
           <Component {...pageProps} />

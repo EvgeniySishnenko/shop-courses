@@ -1,5 +1,8 @@
 import { API_URL } from "@core/http";
-import { AuthResponse } from "@core/models/respons/AuthResponse";
+import {
+  AuthResponse,
+  AuthStatusTokenForResetPwdResponse,
+} from "@core/models/respons/AuthResponse";
 import AuthApi from "@modules/Auth/api/AuthApi";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -52,6 +55,45 @@ export const refresh = createAsyncThunk(
         { withCredentials: true }
       );
       localStorage.setItem("token", response.data.accessToken);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const reset = createAsyncThunk<any, any>(
+  "auth/reset",
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = await AuthApi.reset(params);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+export const resetPwd = createAsyncThunk<any, any>(
+  "auth/resetPwd",
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = await AuthApi.resetPwd(params);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const checkTokenForResetPwd = createAsyncThunk<any, any>(
+  "auth/checkTokenForResetPwd",
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = await axios.get<AuthStatusTokenForResetPwdResponse>(
+        `${API_URL}/auth/password/${params.token}`,
+        { withCredentials: true }
+      );
+
       return response.data;
     } catch (error) {
       return rejectWithValue(error);

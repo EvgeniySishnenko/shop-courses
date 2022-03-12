@@ -41,5 +41,13 @@ export const schema = (typeForm: ETypeForm) => {
           .matches(/[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+/, "Некорректный  Email")
           .required("Поле должно быть заполненно"),
       });
+    case ETypeForm.RESETPWD:
+      return yup.object().shape({
+        password: yup
+          .string()
+          .min(6, "Минимум 6 символов")
+          .max(56, "Максимум 56 символов")
+          .required("Поле должно быть заполненно"),
+      });
   }
 };

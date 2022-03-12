@@ -1,7 +1,18 @@
 import { AxiosResponse } from "axios";
-import { AuthResponse } from "@core/models/respons/AuthResponse";
+import {
+  AuthResetPwdResponse,
+  AuthResetResponse,
+  AuthResponse,
+  AuthStatusTokenForResetPwdResponse,
+} from "@core/models/respons/AuthResponse";
 import api from "@core/http";
-import { TLoginParams, TRegistrationParams } from "../models/types";
+import {
+  TCheckTokenResetPwdParams,
+  TLoginParams,
+  TRegistrationParams,
+  TResetParams,
+  TResetPwdParams,
+} from "../models/types";
 
 export default class AuthApi {
   static async login(
@@ -18,5 +29,17 @@ export default class AuthApi {
 
   static async logout(): Promise<void> {
     return api.post("auth/logout");
+  }
+
+  static async reset(
+    params: TResetParams
+  ): Promise<AxiosResponse<AuthResetResponse>> {
+    return api.post<AuthResetResponse>("auth/reset", params);
+  }
+
+  static async resetPwd(
+    params: TResetPwdParams
+  ): Promise<AxiosResponse<AuthResetPwdResponse>> {
+    return api.post<AuthResetPwdResponse>("auth/password", params);
   }
 }

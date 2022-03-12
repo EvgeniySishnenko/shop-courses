@@ -5,3 +5,15 @@ export interface AuthResponse {
   refreshToken: string;
   user: IUser;
 }
+
+export interface AuthResetResponse {
+  sendMail: string;
+  token: string;
+}
+export interface AuthResetPwdResponse {
+  resetPwd: boolean;
+}
+
+export interface AuthStatusTokenForResetPwdResponse {
+  checkStatusToken: boolean;
+}

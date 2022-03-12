@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { FC, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
@@ -9,21 +9,34 @@ import Link from "next/link";
 import { IForm } from "./models/interfaces";
 import { ETypeForm } from "./models/enums";
 import { schema } from "@modules/Auth/schema";
+import { useSelector } from "react-redux";
+import { getInputError } from "@modules/Auth/reducer/selectors";
 
-export const Form: FC<IForm> = ({ formContent, typeForm }) => {
+export const Form: FC<IForm> = ({ onSubmitForm, formContent, typeForm }) => {
+  const inputError = useSelector(getInputError);
   const {
     register,
     handleSubmit,
     reset,
+    setError,
     formState: { errors, isValid },
   } = useForm<any>({
     mode: "onBlur",
     resolver: yupResolver(schema(typeForm)),
   });
 
-  function onSubmit<T>(data: T) {
+  const onSubmit = (data: unknown) => {
+    onSubmitForm(data);
     reset();
-  }
+  };
+
+  useEffect(() => {
+    if (inputError) {
+      setError(inputError.field, {
+        message: inputError.message,
+      });
+    }
+  }, [inputError]);
 
   return (
     <Stack

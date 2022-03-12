@@ -1,11 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, logout, refresh, registration } from "./actions";
+import {
+  checkTokenForResetPwd,
+  login,
+  logout,
+  refresh,
+  registration,
+  reset,
+  resetPwd,
+} from "./actions";
 
 const initialState: any = {
-  user: { name: null, id: null },
+  user: null,
   isAuth: false,
   isLoading: false,
+  sendMail: false,
   error: null,
+  inputError: null,
 };
 
 export const AuthSlice = createSlice({
@@ -17,28 +27,30 @@ export const AuthSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(login.fulfilled, (state, { payload }) => {
-      state.user.name = payload.user.email;
-      state.user.id = payload.user.id;
       state.isAuth = true;
       state.isLoading = false;
       state.error = null;
+      Object.assign(state, {
+        user: {
+          email: payload.user.email,
+          id: payload.user.id,
+          isActivated: payload.user.isActivated,
+        },
+      });
     });
 
     builder.addCase(login.rejected, (state, action) => {
-      console.log("Ошибка", action);
       state.error = "Ошибка"; // todo
     });
 
     builder.addCase(registration.pending, (state, action) => {
-      // state.isLoading = true;
+      state.isLoading = true;
     });
     builder.addCase(registration.fulfilled, (state, action) => {
-      console.log("fulfilled", action);
-      // state.name = action.name;
-      // state.password = action.password;
+      state.isLoading = false;
     });
     builder.addCase(registration.rejected, (state, action) => {
-      console.log("Ошибка", action);
+      state.isLoading = false;
       state.error = "Ошибка"; // todo
     });
 
@@ -49,26 +61,64 @@ export const AuthSlice = createSlice({
       state.isAuth = false;
       state.isLoading = false;
       state.error = null;
-      state.user.name = null;
-      state.user.id = null;
+      state.user = null;
     });
     builder.addCase(logout.rejected, (state, action) => {
-      console.log("Ошибка", action);
       state.error = "Ошибка"; // todo
     });
 
-    builder.addCase(refresh.pending, (state, action) => {
-      state.isLoading = true;
-    });
+    builder.addCase(refresh.pending, (state, action) => {});
     builder.addCase(refresh.fulfilled, (state, { payload }) => {
-      state.user.name = payload.user.email;
-      state.user.id = payload.user.id;
       state.isAuth = true;
       state.error = null;
+      Object.assign(state, {
+        user: {
+          email: payload.user.email,
+          id: payload.user.id,
+          isActivated: payload.user.isActivated,
+        },
+      });
     });
 
     builder.addCase(refresh.rejected, (state, action) => {
-      console.log("Ошибка", action);
+      state.error = "Ошибка"; // todo
+    });
+
+    builder.addCase(reset.fulfilled, (state, { payload }) => {
+      Object.assign(state, {
+        sendMail: payload.sendMail,
+        token: payload.token,
+      });
+    });
+
+    builder.addCase(reset.rejected, (state, { payload }) => {
+      Object.assign(state, {
+        inputError: { field: "email", message: payload.response.data.error },
+      });
+    });
+
+    builder.addCase(resetPwd.fulfilled, (state, { payload }) => {
+      Object.assign(state, {
+        resetPwd: payload.resetPwd,
+      });
+    });
+
+    builder.addCase(resetPwd.rejected, (state, { payload }) => {
+      Object.assign(state, {
+        inputError: { field: "password", message: payload.response.data.error },
+      });
+    });
+    builder.addCase(checkTokenForResetPwd.pending, (state, { payload }) => {
+      state.isLoading = true;
+    });
+    builder.addCase(checkTokenForResetPwd.fulfilled, (state, { payload }) => {
+      Object.assign(state, {
+        checkStatusToken: payload.checkStatusToken,
+      });
+      state.isLoading = false;
+    });
+
+    builder.addCase(checkTokenForResetPwd.rejected, (state, action) => {
       state.error = "Ошибка"; // todo
     });
   },

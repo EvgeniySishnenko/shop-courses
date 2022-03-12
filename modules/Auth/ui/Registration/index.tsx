@@ -5,8 +5,17 @@ import Layout from "@modules/ui/Layout";
 import formContent from "@modules/Auth/consts/registration-form-const";
 import Link from "next/link";
 import { ETypeForm } from "@shared/Form/models/enums";
+import { useAppDispatch } from "@core/hooks/redux";
+import { registration } from "@modules/auth/reducer/actions";
+import { TRegistrationParams } from "@modules/Auth/models/types";
 
 const Registration: FC = () => {
+  const dispatch = useAppDispatch();
+
+  const handleSubmitForm = (data: TRegistrationParams) => {
+    dispatch(registration(data));
+  };
+
   return (
     <Layout title="Регистрация">
       <Typography variant="h4" component="div" gutterBottom>
@@ -23,7 +32,11 @@ const Registration: FC = () => {
         </Typography>
       </Grid>
 
-      <Form formContent={formContent} typeForm={ETypeForm.REGISTRAITION} />
+      <Form
+        onSubmitForm={handleSubmitForm}
+        formContent={formContent}
+        typeForm={ETypeForm.REGISTRAITION}
+      />
     </Layout>
   );
 };

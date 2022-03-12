@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { Typography } from "@mui/material";
 import Layout from "@modules/ui/Layout";
-import { Login } from "./Login";
+import { Login } from "./ui/Login";
 
 const page: { [key: string]: "Авторицация" | "Регистрация" } = {
   login: "Авторицация",

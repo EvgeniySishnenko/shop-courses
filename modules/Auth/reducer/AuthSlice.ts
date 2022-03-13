@@ -14,8 +14,7 @@ const initialState: any = {
   isAuth: false,
   isLoading: false,
   sendMail: false,
-  error: null,
-  inputError: null,
+  errors: null,
 };
 
 export const AuthSlice = createSlice({
@@ -39,8 +38,8 @@ export const AuthSlice = createSlice({
       });
     });
 
-    builder.addCase(login.rejected, (state, action) => {
-      state.error = "Ошибка"; // todo
+    builder.addCase(login.rejected, (state, { payload }) => {
+      state.errors = payload;
     });
 
     builder.addCase(registration.pending, (state, action) => {
@@ -92,9 +91,7 @@ export const AuthSlice = createSlice({
     });
 
     builder.addCase(reset.rejected, (state, { payload }) => {
-      Object.assign(state, {
-        inputError: { field: "email", message: payload.response.data.error },
-      });
+      state.errors = payload;
     });
 
     builder.addCase(resetPwd.fulfilled, (state, { payload }) => {
@@ -105,7 +102,7 @@ export const AuthSlice = createSlice({
 
     builder.addCase(resetPwd.rejected, (state, { payload }) => {
       Object.assign(state, {
-        inputError: { field: "password", message: payload.response.data.error },
+        errors: { field: "password", message: payload.response.data.error },
       });
     });
     builder.addCase(checkTokenForResetPwd.pending, (state, { payload }) => {

@@ -10,10 +10,11 @@ import { IForm } from "./models/interfaces";
 import { ETypeForm } from "./models/enums";
 import { schema } from "@modules/Auth/schema";
 import { useSelector } from "react-redux";
-import { getInputError } from "@modules/Auth/reducer/selectors";
+import { getInputErrors } from "@modules/Auth/reducer/selectors";
+import { TInputError } from "./models/types";
 
 export const Form: FC<IForm> = ({ onSubmitForm, formContent, typeForm }) => {
-  const inputError = useSelector(getInputError);
+  const serverErrors = useSelector(getInputErrors);
   const {
     register,
     handleSubmit,
@@ -31,12 +32,14 @@ export const Form: FC<IForm> = ({ onSubmitForm, formContent, typeForm }) => {
   };
 
   useEffect(() => {
-    if (inputError) {
-      setError(inputError.field, {
-        message: inputError.message,
+    if (serverErrors) {
+      serverErrors.map((error: TInputError) => {
+        setError(error.param, {
+          message: error.msg,
+        });
       });
     }
-  }, [inputError]);
+  }, [serverErrors]);
 
   return (
     <Stack

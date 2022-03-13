@@ -1,13 +1,23 @@
 import { API_URL } from "@core/http";
 import {
+  AuthResetPwdResponse,
+  AuthResetResponse,
   AuthResponse,
   AuthStatusTokenForResetPwdResponse,
 } from "@core/models/respons/AuthResponse";
+import { makeError } from "@core/utils/makeError";
 import AuthApi from "@modules/Auth/api/AuthApi";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import {
+  TCheckTokenResetPwdParams,
+  TLoginParams,
+  TRegistrationParams,
+  TResetParams,
+  TResetPwdParams,
+} from "../models/types";
 
-export const login = createAsyncThunk<any, any>(
+export const login = createAsyncThunk<AuthResponse, TLoginParams>(
   "auth/login",
   async (params, { rejectWithValue }) => {
     try {
@@ -15,12 +25,12 @@ export const login = createAsyncThunk<any, any>(
       localStorage.setItem("token", response.data.accessToken);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(makeError(error));
     }
   }
 );
 
-export const registration = createAsyncThunk<any, any>(
+export const registration = createAsyncThunk<AuthResponse, TRegistrationParams>(
   "auth/registration",
   async (params, { rejectWithValue }) => {
     try {
@@ -62,18 +72,18 @@ export const refresh = createAsyncThunk(
   }
 );
 
-export const reset = createAsyncThunk<any, any>(
+export const reset = createAsyncThunk<AuthResetResponse, TResetParams>(
   "auth/reset",
   async (params, { rejectWithValue }) => {
     try {
       const response = await AuthApi.reset(params);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(makeError(error));
     }
   }
 );
-export const resetPwd = createAsyncThunk<any, any>(
+export const resetPwd = createAsyncThunk<AuthResetPwdResponse, TResetPwdParams>(
   "auth/resetPwd",
   async (params, { rejectWithValue }) => {
     try {
@@ -85,18 +95,18 @@ export const resetPwd = createAsyncThunk<any, any>(
   }
 );
 
-export const checkTokenForResetPwd = createAsyncThunk<any, any>(
-  "auth/checkTokenForResetPwd",
-  async (params, { rejectWithValue }) => {
-    try {
-      const response = await axios.get<AuthStatusTokenForResetPwdResponse>(
-        `${API_URL}/auth/password/${params.token}`,
-        { withCredentials: true }
-      );
+export const checkTokenForResetPwd = createAsyncThunk<
+  AuthStatusTokenForResetPwdResponse,
+  TCheckTokenResetPwdParams
+>("auth/checkTokenForResetPwd", async (params, { rejectWithValue }) => {
+  try {
+    const response = await axios.get<AuthStatusTokenForResetPwdResponse>(
+      `${API_URL}/auth/password/${params.token}`,
+      { withCredentials: true }
+    );
 
-      return response.data;
-    } catch (error) {
-      return rejectWithValue(error);
-    }
+    return response.data;
+  } catch (error) {
+    return rejectWithValue(error);
   }
-);
+});

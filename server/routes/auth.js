@@ -41,7 +41,17 @@ router.post("/reset", async (req, res) => {
         await transporter.sendMail(resetEmail(condidate.email, token));
         return res.json({ sendMail: true, token });
       } else {
-        return res.status(401).json({ error: "Пользователь не найден" });
+        return res.status(401).json({
+          errors: [
+            {
+              value: req.body.email,
+              msg: "Пользователь не найден",
+              param: "email",
+              location: "body",
+            },
+          ],
+          message: "Ошибка валидации",
+        });
       }
     });
   } catch (error) {

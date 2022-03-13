@@ -6,9 +6,13 @@ export const getStatusSendMail = createSelector(
   (sendMail) => sendMail
 );
 
-export const getInputError = createSelector(
-  (state: RootState) => state.auth.inputError,
-  (inputError) => inputError
+export const getInputErrors = createSelector(
+  (state: RootState) => state.auth.errors,
+  (errors) => {
+    if (errors?.type === "formError") {
+      return errors.inputError;
+    }
+  }
 );
 
 export const getStatusResetPwd = createSelector(

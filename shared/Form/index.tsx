@@ -21,7 +21,7 @@ export const Form: FC<IForm> = ({ onSubmitForm, formContent, typeForm }) => {
     reset,
     setError,
     formState: { errors, isValid },
-  } = useForm<any>({
+  } = useForm({
     mode: "onBlur",
     resolver: yupResolver(schema(typeForm)),
   });

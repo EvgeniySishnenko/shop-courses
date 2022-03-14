@@ -1,4 +1,4 @@
-import { AuthResponse } from "@core/models/respons/AuthResponse";
+import { AuthResponse } from "@modules/Auth/models/interfaces";
 import axios, { AxiosRequestConfig } from "axios";
 
 export const API_URL = "http://localhost:5000";

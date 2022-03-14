@@ -7,15 +7,13 @@ import { Provider } from "react-redux";
 import { setupStore } from "@core/store";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const store = setupStore();
-
   return (
     <>
       <Head>
         <meta name="description" content="Магазин курсов" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Provider store={store}>
+      <Provider store={setupStore}>
         <GlobalStyle />
         <Header />
         <Container maxWidth="sm">

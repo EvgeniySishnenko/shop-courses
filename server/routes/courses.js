@@ -13,12 +13,9 @@ function isOwner(course, req) {
 router.get("/", async (req, res) => {
   try {
     const courses = await Course.find();
-
-    res.render("courses", {
-      title: "Courses",
-      isCourses: true,
-      userId: req.user ? req.user._id.toString() : null,
+    return res.json({
       courses,
+      userId: req.user ? req.user._id.toString() : null,
     });
   } catch (error) {
     console.log(error);
@@ -29,8 +26,7 @@ router.get("/:id", async (req, res) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) return false;
     const course = await Course.findById(req.params.id);
-    res.render("course", {
-      title: `Course ${course?.title}`,
+    return res.json({
       course,
     });
   } catch (error) {

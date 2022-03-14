@@ -1,6 +1,6 @@
 import Layout from "@modules/ui/Layout";
 import { Typography } from "@mui/material";
-import { CardCourses } from "./CardCourses";
+import { CoursesList } from "../../ui/CoursesList.tsx";
 
 const CoursesContainer = () => {
   return (
@@ -8,7 +8,7 @@ const CoursesContainer = () => {
       <Typography variant="h4" component="div" gutterBottom>
         Курсы
       </Typography>
-      <CardCourses />
+      <CoursesList />
     </Layout>
   );
 };

@@ -40,7 +40,7 @@ app.use(
 
 app.use("/auth", authRouts);
 app.use("/profile", profileRouts);
-
+app.use("/courses", coursesRouts);
 app.use(errorMiddleware);
 
 async function start() {

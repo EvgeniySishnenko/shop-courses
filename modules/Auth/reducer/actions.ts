@@ -4,7 +4,7 @@ import {
   AuthResetResponse,
   AuthResponse,
   AuthStatusTokenForResetPwdResponse,
-} from "@core/models/respons/AuthResponse";
+} from "@modules/Auth/models/interfaces";
 import { makeError } from "@core/utils/makeError";
 import AuthApi from "@modules/Auth/api/AuthApi";
 import { createAsyncThunk } from "@reduxjs/toolkit";

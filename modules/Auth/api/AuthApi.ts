@@ -3,11 +3,9 @@ import {
   AuthResetPwdResponse,
   AuthResetResponse,
   AuthResponse,
-  AuthStatusTokenForResetPwdResponse,
-} from "@core/models/respons/AuthResponse";
+} from "@modules/Auth/models/interfaces";
 import api from "@core/http";
 import {
-  TCheckTokenResetPwdParams,
   TLoginParams,
   TRegistrationParams,
   TResetParams,

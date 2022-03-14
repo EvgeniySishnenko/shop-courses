@@ -7,7 +7,7 @@ export interface ICourse {
 }
 
 export interface ICoursesResponse {
-  data: { courses: ICourse; userId: string };
+  courses: ICourse[];
 }
 
 export interface ICourseResponseResponse {
@@ -15,12 +15,12 @@ export interface ICourseResponseResponse {
 }
 
 export interface IInitialStateCourses {
-  data: ICoursesResponse | null;
+  courses: ICoursesResponse | null;
   isLoading: boolean;
   errors: unknown;
 }
 
 export interface ISingleCourseInitialState
-  extends Omit<IInitialStateCourses, "data"> {
+  extends Omit<IInitialStateCourses, "courses"> {
   courseSingle: ICourse | null;
 }

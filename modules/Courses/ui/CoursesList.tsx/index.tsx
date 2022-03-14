@@ -2,20 +2,18 @@ import { FC } from "react";
 import { Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 import { CardCourses } from "../CardCourses";
-import { getCourses, getIsEditCourses } from "../../reducer/selectors";
+import { getCourses } from "../../reducer/selectors";
 import { ICourse } from "@modules/Courses/modules/inerfaces";
+import { getAuthUserId } from "@modules/Auth/reducer/selectors";
 
 export const CoursesList: FC = () => {
   const courses = useSelector(getCourses);
-  const isEditCourses = useSelector(getIsEditCourses);
+  const authUserId = useSelector(getAuthUserId);
+
   return (
     <Grid>
       {courses.map((course: ICourse) => (
-        <CardCourses
-          key={course._id}
-          course={course}
-          isEditCourses={isEditCourses}
-        />
+        <CardCourses key={course._id} course={course} authUserId={authUserId} />
       ))}
     </Grid>
   );

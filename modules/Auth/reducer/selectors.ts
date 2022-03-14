@@ -27,3 +27,8 @@ export const getIsLoading = createSelector(
   (state: RootState) => state.auth.isLoading,
   (isLoading) => isLoading
 );
+
+export const getAuthUserId = createSelector(
+  (state: RootState) => state.auth.user?.id,
+  (id) => id
+);

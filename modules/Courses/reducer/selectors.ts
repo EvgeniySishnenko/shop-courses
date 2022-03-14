@@ -2,16 +2,9 @@ import { RootState } from "@core/store";
 import { createSelector } from "@reduxjs/toolkit";
 
 export const getCourses = createSelector(
-  (state: RootState) => state.courses.data,
+  (state: RootState) => state.courses,
   ({ courses }) => {
     return courses;
-  }
-);
-export const getIsEditCourses = createSelector(
-  (state: RootState) => state.courses.data,
-  (state: RootState) => state.auth.user?.id,
-  (authUserId, userId) => {
-    return authUserId === userId;
   }
 );
 

@@ -7,7 +7,7 @@ import {
 } from "../modules/inerfaces";
 
 const coursesInitialState: IInitialStateCourses = {
-  data: null,
+  courses: null,
   isLoading: false,
   errors: null,
 };
@@ -22,9 +22,9 @@ const prepareCoursesState = (
   state: IInitialStateCourses,
   { payload }: PayloadAction<ICoursesResponse>
 ) => {
-  const { data } = payload;
+  const { courses } = payload;
   Object.assign(state, {
-    data,
+    courses,
   });
 };
 

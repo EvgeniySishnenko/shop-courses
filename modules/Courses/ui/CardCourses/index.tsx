@@ -9,10 +9,10 @@ import LinkComponent from "next/link";
 
 interface ICardCourses {
   course: ICourse;
-  isEditCourses: boolean;
+  authUserId: string;
 }
 
-export const CardCourses: FC<ICardCourses> = ({ course, isEditCourses }) => {
+export const CardCourses: FC<ICardCourses> = ({ course, authUserId }) => {
   return (
     <Card key={course._id} sx={{ maxWidth: 345, marginTop: "16px" }}>
       <CardMedia
@@ -36,7 +36,7 @@ export const CardCourses: FC<ICardCourses> = ({ course, isEditCourses }) => {
             Открыть
           </Link>
         </LinkComponent>
-        {isEditCourses && (
+        {authUserId === course.userId && (
           <LinkComponent href={`/courses/${course._id}`}>
             <Link component="button" sx={{ fontSize: "16px" }} underline="none">
               Редактировать

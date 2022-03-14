@@ -15,7 +15,6 @@ router.get("/", async (req, res) => {
     const courses = await Course.find();
     return res.json({
       courses,
-      userId: req.user ? req.user._id.toString() : null,
     });
   } catch (error) {
     console.log(error);

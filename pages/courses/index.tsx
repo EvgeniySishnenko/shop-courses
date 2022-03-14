@@ -6,7 +6,7 @@ import { ICoursesResponse } from "@modules/Courses/modules/inerfaces";
 import { useAsyncSlice } from "@core/store";
 import { CoursesSlice } from "@modules/Courses/reducer/CoursesSlice";
 
-const Courses = (courses: ICoursesResponse) => {
+const Courses = ({ courses }: ICoursesResponse) => {
   useAsyncSlice({ courses: CoursesSlice }, courses);
 
   return <CoursesContainer />;
@@ -16,10 +16,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const res = await axios.get<ICoursesResponse>(`${API_URL}/courses`, {
     withCredentials: true,
   });
-
   return {
     props: {
-      data: res.data,
+      courses: res.data,
     },
   };
 };

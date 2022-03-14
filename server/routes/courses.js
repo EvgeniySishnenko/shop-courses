@@ -75,8 +75,9 @@ router.post("/edit", auth, coursesValidators, async (req, res) => {
 
 router.post("/remove", auth, async (req, res) => {
   try {
-    await Course.deleteOne({ _id: req.body.id, userId: req.user._id });
-    res.redirect("/courses");
+    await Course.deleteOne({ _id: req.body.id, userId: req.user.id });
+
+    return res.status(200).json({ editCourse: true });
   } catch (error) {
     console.log(error);
   }

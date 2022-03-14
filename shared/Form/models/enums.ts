@@ -3,5 +3,6 @@ export enum ETypeForm {
   REGISTRATION = "registration",
   RESET = "reset",
   RESETPWD = "resetPwd",
-  COURSE = "course",
+  EDIT_COURSE = "editCourse",
+  ADD_COURSE = "addCourse",
 }

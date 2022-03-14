@@ -13,3 +13,15 @@ export const editCourse = createAsyncThunk<IEditCourseResponse, ICourse>(
     }
   }
 );
+
+export const removeCourse = createAsyncThunk<
+  IEditCourseResponse,
+  { id: string }
+>("courses/removeCourse", async (id, { rejectWithValue }) => {
+  try {
+    const response = await CoursesApi.removeCourse({ id });
+    return response.data;
+  } catch (error) {
+    rejectWithValue(error);
+  }
+});

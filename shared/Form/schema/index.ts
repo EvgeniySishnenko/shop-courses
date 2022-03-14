@@ -49,7 +49,8 @@ export const schema = (typeForm: ETypeForm) => {
           .max(56, "Максимум 56 символов")
           .required("Поле должно быть заполненно"),
       });
-    case ETypeForm.COURSE:
+    case ETypeForm.EDIT_COURSE:
+    case ETypeForm.ADD_COURSE:
       return yup.object().shape({
         title: yup
           .string()

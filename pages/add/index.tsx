@@ -1,4 +1,4 @@
-import { AddCourseContainer } from "@modules/AddCourse";
+import { AddCourseContainer } from "@modules/Courses/Containers/AddCourse";
 
 const AddCourses = () => {
   return <AddCourseContainer />;

@@ -18,6 +18,7 @@ export const Form: FC<IForm> = ({
   onSubmitForm,
   formContent,
   typeForm,
+  onExtraHandler,
 }) => {
   const serverErrors = useSelector(getInputErrors);
   const {
@@ -87,6 +88,17 @@ export const Form: FC<IForm> = ({
       <Button disabled={!isValid} type="submit" variant="contained">
         Отправить
       </Button>
+      {typeForm === ETypeForm.EDIT_COURSE && (
+        <Button
+          disabled={!isValid}
+          color="error"
+          type="button"
+          variant="outlined"
+          onClick={onExtraHandler}
+        >
+          Удалить
+        </Button>
+      )}
     </Stack>
   );
 };

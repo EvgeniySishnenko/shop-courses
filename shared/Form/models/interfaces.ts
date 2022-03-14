@@ -6,4 +6,5 @@ export interface IForm {
   typeForm: ETypeForm;
   onSubmitForm(data: unknown): void;
   defaultValues?: { [x: string]: string };
+  onExtraHandler?(value?: unknown): void;
 }

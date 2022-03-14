@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import Layout from "@modules/ui/Layout";
 import { Alert, Typography } from "@mui/material";
@@ -11,9 +13,7 @@ import { ETypeForm } from "@shared/Form/models/enums";
 import { useAppDispatch } from "@core/hooks/redux";
 import formContent from "@modules/Courses/consts/course-form-const";
 import { getIsAuth } from "@modules/Auth/reducer/selectors";
-import { editCourse } from "@modules/Courses/reducer/actions";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { editCourse, removeCourse } from "@modules/Courses/reducer/actions";
 
 const EditCourse = () => {
   const course = useSelector(getSingleCourse);
@@ -22,8 +22,13 @@ const EditCourse = () => {
   const isLoading = useSelector(getIsLoading);
   const dispatch = useAppDispatch();
   const router = useRouter();
+
   const handleSubmitForm = (data: any) => {
     dispatch(editCourse(data));
+  };
+
+  const handleRemoveCourse = () => {
+    dispatch(removeCourse(course._id));
   };
 
   useEffect(() => {
@@ -39,8 +44,9 @@ const EditCourse = () => {
         <Form
           onSubmitForm={handleSubmitForm}
           defaultValues={course}
-          typeForm={ETypeForm.COURSE}
+          typeForm={ETypeForm.EDIT_COURSE}
           formContent={formContent}
+          onExtraHandler={handleRemoveCourse}
         />
       )}
     </Layout>

@@ -5,7 +5,7 @@ import {
   IInitialStateCourses,
   ISingleCourseInitialState,
 } from "../modules/interfaces";
-import { editCourse } from "./actions";
+import { editCourse, removeCourse } from "./actions";
 
 const coursesInitialState: IInitialStateCourses = {
   courses: null,
@@ -59,6 +59,19 @@ export const CourseSingleSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(editCourse.rejected, (state, { payload }) => {
+      state.errors = payload;
+      state.isLoading = false;
+    });
+
+    builder.addCase(removeCourse.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(removeCourse.fulfilled, (state, { payload }) => {
+      const { editCourse } = payload;
+      Object.assign(state, { editCourse });
+      state.isLoading = false;
+    });
+    builder.addCase(removeCourse.rejected, (state, { payload }) => {
       state.errors = payload;
       state.isLoading = false;
     });

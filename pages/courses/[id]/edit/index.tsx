@@ -1,15 +1,15 @@
 import { GetServerSideProps } from "next";
-import CourseSingleContainer from "@modules/Courses/Containers/CourseSingle";
+import EditCourseContainer from "@modules/Courses/Containers/EditCourse";
+import { ICourseResponseResponse } from "@modules/Courses/modules/interfaces";
 import axios from "axios";
 import { API_URL } from "@core/http";
-import { ICourseResponseResponse } from "@modules/Courses/modules/interfaces";
 import { useAsyncSlice } from "@core/store";
 import { CourseSingleSlice } from "@modules/Courses/reducer/CoursesSlice";
 
-const CourseSingle = ({ course }: ICourseResponseResponse) => {
+const EditCourses = ({ course }: ICourseResponseResponse) => {
   useAsyncSlice({ courseSingle: CourseSingleSlice }, course);
 
-  return <CourseSingleContainer />;
+  return <EditCourseContainer />;
 };
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
@@ -27,4 +27,4 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   };
 };
 
-export default CourseSingle;
+export default EditCourses;

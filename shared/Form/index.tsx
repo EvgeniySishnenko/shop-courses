@@ -8,12 +8,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Link from "next/link";
 import { IForm } from "./models/interfaces";
 import { ETypeForm } from "./models/enums";
-import { schema } from "@modules/Auth/schema";
+import { schema } from "@shared/Form/schema";
 import { useSelector } from "react-redux";
 import { getInputErrors } from "@modules/Auth/reducer/selectors";
 import { TInputError } from "./models/types";
 
-export const Form: FC<IForm> = ({ onSubmitForm, formContent, typeForm }) => {
+export const Form: FC<IForm> = ({
+  defaultValues,
+  onSubmitForm,
+  formContent,
+  typeForm,
+}) => {
   const serverErrors = useSelector(getInputErrors);
   const {
     register,
@@ -23,6 +28,7 @@ export const Form: FC<IForm> = ({ onSubmitForm, formContent, typeForm }) => {
     formState: { errors, isValid },
   } = useForm({
     mode: "onBlur",
+    defaultValues: defaultValues || {},
     resolver: yupResolver(schema(typeForm)),
   });
 
@@ -61,7 +67,6 @@ export const Form: FC<IForm> = ({ onSubmitForm, formContent, typeForm }) => {
           helperText={errors[name]?.message}
         />
       ))}
-
       {typeForm === ETypeForm.LOGIN && (
         <Grid container>
           <Typography component="div" gutterBottom>
@@ -78,6 +83,7 @@ export const Form: FC<IForm> = ({ onSubmitForm, formContent, typeForm }) => {
           </Typography>
         </Grid>
       )}
+
       <Button disabled={!isValid} type="submit" variant="contained">
         Отправить
       </Button>

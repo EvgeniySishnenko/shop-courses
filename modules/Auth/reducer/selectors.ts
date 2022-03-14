@@ -32,3 +32,8 @@ export const getAuthUserId = createSelector(
   (state: RootState) => state.auth.user?.id,
   (id) => id
 );
+
+export const getIsAuth = createSelector(
+  (state: RootState) => state.auth.isAuth,
+  (isAuth) => isAuth
+);

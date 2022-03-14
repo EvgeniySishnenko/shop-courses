@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions, Grid, Link } from "@mui/material";
-import { ICourse } from "@modules/Courses/modules/inerfaces";
+import { ICourse } from "@modules/Courses/modules/interfaces";
 import LinkComponent from "next/link";
 
 interface ICardCourses {
@@ -37,14 +37,19 @@ export const CardCourses: FC<ICardCourses> = ({ course, authUserId }) => {
           </Link>
         </LinkComponent>
         {authUserId === course.userId && (
-          <LinkComponent href={`/courses/${course._id}`}>
-            <Link component="button" sx={{ fontSize: "16px" }} underline="none">
-              Редактировать
-            </Link>
-          </LinkComponent>
+          <>
+            <LinkComponent href={`/courses/${course._id}/edit`}>
+              <Link
+                component="button"
+                sx={{ fontSize: "16px" }}
+                underline="none"
+              >
+                Редактировать
+              </Link>
+            </LinkComponent>
+            <Button variant="contained">Купить</Button>
+          </>
         )}
-
-        <Button variant="contained">Купить</Button>
       </Grid>
     </Card>
   );

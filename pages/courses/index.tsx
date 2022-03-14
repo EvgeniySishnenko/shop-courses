@@ -2,7 +2,7 @@ import { GetServerSideProps } from "next";
 import CoursesContainer from "@modules/Courses/Containers/Courses";
 import axios from "axios";
 import { API_URL } from "@core/http";
-import { ICoursesResponse } from "@modules/Courses/modules/inerfaces";
+import { ICoursesResponse } from "@modules/Courses/modules/interfaces";
 import { useAsyncSlice } from "@core/store";
 import { CoursesSlice } from "@modules/Courses/reducer/CoursesSlice";
 

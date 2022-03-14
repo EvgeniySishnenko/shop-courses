@@ -35,7 +35,7 @@ const Registration: FC = () => {
       <Form
         onSubmitForm={handleSubmitForm}
         formContent={formContent}
-        typeForm={ETypeForm.REGISTRAITION}
+        typeForm={ETypeForm.REGISTRATION}
       />
     </Layout>
   );

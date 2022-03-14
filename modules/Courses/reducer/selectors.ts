@@ -14,3 +14,16 @@ export const getSingleCourse = createSelector(
     return courseSingle;
   }
 );
+
+export const getIsEditCourse = createSelector(
+  (state: RootState) => state.courseSingle,
+  (courseSingle) => {
+    return Boolean(courseSingle.editCourse);
+  }
+);
+export const getIsLoading = createSelector(
+  (state: RootState) => state.courseSingle.isLoading,
+  (isLoading) => {
+    return isLoading;
+  }
+);

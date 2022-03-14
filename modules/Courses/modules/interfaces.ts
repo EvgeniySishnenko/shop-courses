@@ -24,3 +24,7 @@ export interface ISingleCourseInitialState
   extends Omit<IInitialStateCourses, "courses"> {
   courseSingle: ICourse | null;
 }
+
+export interface IEditCourseResponse {
+  editCourse: boolean;
+}

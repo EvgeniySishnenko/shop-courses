@@ -45,8 +45,7 @@ router.get("/:id/edit", auth, async (req, res) => {
       return res.redirect("/courses");
     }
 
-    res.render("edit", {
-      title: `Рeдактировать ${course.title}`,
+    return res.json({
       course,
     });
   } catch (error) {
@@ -56,22 +55,19 @@ router.get("/:id/edit", auth, async (req, res) => {
 
 router.post("/edit", auth, coursesValidators, async (req, res) => {
   try {
-    const { id } = req.body;
-    delete req.body.id;
-    const course = await Course.findById(id);
+    const { _id } = req.body;
+    delete req.body._id;
+    const course = await Course.findById(_id);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      req.flash("errors", errors.array()[0].msg);
-      return res.status(422).redirect(`/courses/${id}/edit?allow=true`);
+      return res.status(422).json(errors);
     }
-
     if (!isOwner(course, req)) {
-      return res.redirect("/courses");
+      return res.status(422).json({ error: "Курс не пренадлежит владельцу" });
     }
     Object.assign(course, req.body);
     await course.save();
-    // await Course.findByIdAndUpdate(id, req.body);
-    return res.redirect("/courses");
+    return res.status(200).json({ editCourse: true });
   } catch (error) {
     console.log(error);
   }

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ICourse } from "@modules/Courses/modules/inerfaces";
+import { ICourse } from "@modules/Courses/modules/interfaces";
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 
 interface ICardSingleCourse {

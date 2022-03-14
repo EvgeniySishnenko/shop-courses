@@ -1,9 +1,4 @@
-import {
-  combineReducers,
-  configureStore,
-  EnhancedStore,
-  Slice,
-} from "@reduxjs/toolkit";
+import { configureStore, EnhancedStore, Slice } from "@reduxjs/toolkit";
 import { rootReducer, createReducer } from "./rootReducer";
 
 export const setupStore: EnhancedStore<any, any, any> & {

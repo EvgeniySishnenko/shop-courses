@@ -14,9 +14,13 @@ export interface ICourseResponseResponse {
   course: ICourse;
 }
 
-export interface IInitiateStateCourses {
+export interface IInitialStateCourses {
   data: ICoursesResponse | null;
-  courseSingle: ICourse;
   isLoading: boolean;
   errors: unknown;
+}
+
+export interface ISingleCourseInitialState
+  extends Omit<IInitialStateCourses, "data"> {
+  courseSingle: ICourse | null;
 }

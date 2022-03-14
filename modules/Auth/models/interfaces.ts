@@ -17,3 +17,11 @@ export interface AuthResetPwdResponse {
 export interface AuthStatusTokenForResetPwdResponse {
   checkStatusToken: boolean;
 }
+
+export interface IAuthInitialState {
+  isAuth: boolean;
+  isLoading: boolean;
+  sendMail: boolean;
+  user: IUser | null;
+  errors: unknown;
+}

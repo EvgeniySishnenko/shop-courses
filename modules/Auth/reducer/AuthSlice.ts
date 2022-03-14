@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IAuthInitialState } from "../models/interfaces";
 import {
   checkTokenForResetPwd,
   login,
@@ -9,7 +10,7 @@ import {
   resetPwd,
 } from "./actions";
 
-const initialState: any = {
+const initialState: IAuthInitialState = {
   user: null,
   isAuth: false,
   isLoading: false,
@@ -28,7 +29,7 @@ export const AuthSlice = createSlice({
     builder.addCase(login.fulfilled, (state, { payload }) => {
       state.isAuth = true;
       state.isLoading = false;
-      state.error = null;
+      state.errors = null;
       Object.assign(state, {
         user: {
           email: payload.user.email,
@@ -50,7 +51,7 @@ export const AuthSlice = createSlice({
     });
     builder.addCase(registration.rejected, (state, action) => {
       state.isLoading = false;
-      state.error = "Ошибка"; // todo
+      state.errors = "Ошибка"; // todo
     });
 
     builder.addCase(logout.pending, (state, action) => {
@@ -59,11 +60,11 @@ export const AuthSlice = createSlice({
     builder.addCase(logout.fulfilled, (state, action) => {
       state.isAuth = false;
       state.isLoading = false;
-      state.error = null;
+      state.errors = null;
       state.user = null;
     });
     builder.addCase(logout.rejected, (state, action) => {
-      state.error = "Ошибка"; // todo
+      state.errors = "Ошибка"; // todo
     });
 
     builder.addCase(refresh.pending, (state, action) => {});
@@ -80,7 +81,7 @@ export const AuthSlice = createSlice({
     });
 
     builder.addCase(refresh.rejected, (state, action) => {
-      state.error = "Ошибка"; // todo
+      state.errors = "Ошибка"; // todo
     });
 
     builder.addCase(reset.fulfilled, (state, { payload }) => {
@@ -116,7 +117,7 @@ export const AuthSlice = createSlice({
     });
 
     builder.addCase(checkTokenForResetPwd.rejected, (state, action) => {
-      state.error = "Ошибка"; // todo
+      state.errors = "Ошибка"; // todo
     });
   },
 });

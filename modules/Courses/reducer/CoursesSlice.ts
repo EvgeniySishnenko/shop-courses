@@ -5,7 +5,7 @@ import {
   IInitialStateCourses,
   ISingleCourseInitialState,
 } from "../modules/interfaces";
-import { editCourse, removeCourse } from "./actions";
+import { addCourse, editCourse, removeCourse } from "./actions";
 
 const coursesInitialState: IInitialStateCourses = {
   courses: null,
@@ -17,6 +17,9 @@ const singleCourseInitialState: ISingleCourseInitialState = {
   isLoading: false,
   errors: null,
   courseSingle: null,
+  saveCourse: false,
+  editCourse: false,
+  removeCourse: false,
 };
 
 const prepareCoursesState = (
@@ -63,12 +66,25 @@ export const CourseSingleSlice = createSlice({
       state.isLoading = false;
     });
 
+    builder.addCase(addCourse.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(addCourse.fulfilled, (state, { payload }) => {
+      const { saveCourse } = payload;
+      Object.assign(state, { saveCourse });
+      state.isLoading = false;
+    });
+    builder.addCase(addCourse.rejected, (state, { payload }) => {
+      state.errors = payload;
+      state.isLoading = false;
+    });
+
     builder.addCase(removeCourse.pending, (state, action) => {
       state.isLoading = true;
     });
     builder.addCase(removeCourse.fulfilled, (state, { payload }) => {
-      const { editCourse } = payload;
-      Object.assign(state, { editCourse });
+      const { removeCourse } = payload;
+      Object.assign(state, { removeCourse });
       state.isLoading = false;
     });
     builder.addCase(removeCourse.rejected, (state, { payload }) => {

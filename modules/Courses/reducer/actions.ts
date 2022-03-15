@@ -1,27 +1,45 @@
+import { makeError } from "@core/utils/makeError";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import CoursesApi from "../api/CoursesApi";
-import { ICourse, IEditCourseResponse } from "../modules/interfaces";
+import {
+  IAddCourseResponse,
+  ICourse,
+  IEditCourseResponse,
+  IRemoveCourseResponse,
+} from "../modules/interfaces";
 
 export const editCourse = createAsyncThunk<IEditCourseResponse, ICourse>(
-  "courses/editCourse",
+  "courseSingle/editCourse",
   async (params, { rejectWithValue }) => {
     try {
       const response = await CoursesApi.editCourse(params);
       return response.data;
     } catch (error) {
-      rejectWithValue(error);
+      return rejectWithValue(makeError(error));
+    }
+  }
+);
+
+export const addCourse = createAsyncThunk<IAddCourseResponse, ICourse>(
+  "courseSingle/addCourse",
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = await CoursesApi.addCourse(params);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(makeError(error));
     }
   }
 );
 
 export const removeCourse = createAsyncThunk<
-  IEditCourseResponse,
+  IRemoveCourseResponse,
   { id: string }
->("courses/removeCourse", async (id, { rejectWithValue }) => {
+>("courseSingle/removeCourse", async (id, { rejectWithValue }) => {
   try {
     const response = await CoursesApi.removeCourse({ id });
     return response.data;
   } catch (error) {
-    rejectWithValue(error);
+    return rejectWithValue(makeError(error));
   }
 });

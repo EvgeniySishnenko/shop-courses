@@ -41,6 +41,7 @@ export const AuthSlice = createSlice({
 
     builder.addCase(login.rejected, (state, { payload }) => {
       state.errors = payload;
+      state.isLoading = false;
     });
 
     builder.addCase(registration.pending, (state, action) => {
@@ -70,7 +71,7 @@ export const AuthSlice = createSlice({
     builder.addCase(refresh.pending, (state, action) => {});
     builder.addCase(refresh.fulfilled, (state, { payload }) => {
       state.isAuth = true;
-      state.error = null;
+      state.errors = null;
       Object.assign(state, {
         user: {
           email: payload.user.email,

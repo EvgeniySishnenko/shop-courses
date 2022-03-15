@@ -35,14 +35,14 @@ router.get("/:id", async (req, res) => {
 
 router.get("/:id/edit", auth, async (req, res) => {
   if (!req.query.allow) {
-    return res.redirect("/");
+    return res.status(422);
   }
 
   try {
     const course = await Course.findById(req.params.id);
 
     if (!isOwner(course, req)) {
-      return res.redirect("/courses");
+      return res.status(422);
     }
 
     return res.json({
@@ -60,7 +60,14 @@ router.post("/edit", auth, coursesValidators, async (req, res) => {
     const course = await Course.findById(_id);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(422).json(errors);
+      return res
+        .status(400)
+        .json(
+          Object.assign(
+            {},
+            { errors: errors.array(), message: "Ошибка валидации" }
+          )
+        );
     }
     if (!isOwner(course, req)) {
       return res.status(422).json({ error: "Курс не пренадлежит владельцу" });
@@ -77,7 +84,7 @@ router.post("/remove", auth, async (req, res) => {
   try {
     await Course.deleteOne({ _id: req.body.id, userId: req.user.id });
 
-    return res.status(200).json({ editCourse: true });
+    return res.status(200).json({ removeCourse: true });
   } catch (error) {
     console.log(error);
   }

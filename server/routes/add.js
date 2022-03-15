@@ -4,33 +4,30 @@ const Course = require("../models/course");
 const auth = require("../midlleware/auth");
 const { validationResult } = require("express-validator/check");
 const { coursesValidators } = require("../utils/validators");
+const ApiError = require("../exeptions/api-error");
 
 router.post("/", auth, coursesValidators, async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    req.flash("loginError", errors.array()[0].msg);
-    return res.status(422).render("./add", {
-      title: "Добавить курс",
-      isAdd: true,
-      error: errors.array()[0].msg,
-      data: {
-        title: req.body.title,
-        price: req.body.price,
-        img: req.body.img,
-      },
-    });
+    return res
+      .status(400)
+      .json(
+        Object.assign(
+          {},
+          { errors: errors.array(), message: "Ошибка валидации" }
+        )
+      );
   }
 
   const course = new Course({
     title: req.body.title,
     price: req.body.price,
     img: req.body.img,
-    userId: req.user._id, // req.user так тоже можно
+    userId: req.user.id, // req.user так тоже можно
   });
-
   try {
     await course.save();
-    res.redirect("/courses");
+    res.json({ saveCourse: true });
   } catch (error) {
     console.log(error);
   }

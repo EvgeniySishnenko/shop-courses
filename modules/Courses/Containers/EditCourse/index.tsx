@@ -5,7 +5,7 @@ import Layout from "@modules/ui/Layout";
 import { Alert, Typography } from "@mui/material";
 import {
   getSingleCourse,
-  getIsEditCourse,
+  getActionsCourse,
   getIsLoading,
 } from "@modules/Courses/reducer/selectors";
 import { Form } from "@shared/Form";
@@ -18,8 +18,7 @@ import { editCourse, removeCourse } from "@modules/Courses/reducer/actions";
 const EditCourse = () => {
   const course = useSelector(getSingleCourse);
   const isAuth = useSelector(getIsAuth);
-  const isEditCourse = useSelector(getIsEditCourse);
-  const isLoading = useSelector(getIsLoading);
+  const { isEditCourse, isRemoveCourse } = useSelector(getActionsCourse);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -32,8 +31,8 @@ const EditCourse = () => {
   };
 
   useEffect(() => {
-    if (isEditCourse) router.push("/courses");
-  }, [isEditCourse]);
+    if (isEditCourse || isRemoveCourse) router.push("/courses");
+  }, [isEditCourse, isRemoveCourse]);
 
   return (
     <Layout title={`Редактирование курса ${course.title}`}>

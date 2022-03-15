@@ -41,6 +41,7 @@ app.use(
 app.use("/auth", authRouts);
 app.use("/profile", profileRouts);
 app.use("/courses", coursesRouts);
+app.use("/add", addRouts);
 app.use(errorMiddleware);
 
 async function start() {
@@ -59,55 +60,3 @@ async function start() {
 }
 
 start();
-
-// const Handlebars = require("handlebars");
-
-// const {
-//   allowInsecurePrototypeAccess,
-// } = require("@handlebars/allow-prototype-access");
-
-// const hbs = exphbs.create({
-//   defaultLayout: "main",
-//   extname: "hbs",
-//   handlebars: allowInsecurePrototypeAccess(Handlebars),
-//   helpers: require("./utils/hbs-helpers"),
-// });
-
-// const store = new MongoStore({
-//   collection: "sessions",
-//   uri: keys.MONGODB_URI,
-// });
-
-// app.engine("hbs", hbs.engine);
-// app.set("view engine", "hbs");
-// app.set("views", "views");
-
-// app.use(express.static(path.join(__dirname, "public")));
-// app.use("/images", express.static(path.join(__dirname, "images")));
-
-// app.use(express.urlencoded({ extended: true }));
-// app.use(
-//   session({
-//     secret: keys.SESSION_SECRET,
-//     resavePath: false,
-//     saveUnitialized: false,
-//     store: store,
-//   })
-// );
-// app.use(fileMiddleware.single("avatar"));
-
-// app.use(csrf());
-// app.use(flash());
-// app.use(helmet());
-// app.use(varMiddleware);
-// app.use(userMiddleware);
-// app.use(compression());
-// app.use("/", homeRouts);
-// app.use("/courses", coursesRouts);
-// app.use("/add", addRouts);
-// app.use("/card", cardRouts);
-// app.use("/orders", orderRouts);
-// app.use("/auth", authRouts);
-// app.use("/profile", profileRouts);
-
-// app.use(errorMiddleware);

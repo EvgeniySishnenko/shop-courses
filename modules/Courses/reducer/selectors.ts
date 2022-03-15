@@ -15,12 +15,17 @@ export const getSingleCourse = createSelector(
   }
 );
 
-export const getIsEditCourse = createSelector(
+export const getActionsCourse = createSelector(
   (state: RootState) => state.courseSingle,
   (courseSingle) => {
-    return Boolean(courseSingle.editCourse);
+    return {
+      isSaveCourse: courseSingle?.saveCourse,
+      isEditCourse: courseSingle?.editCourse,
+      isRemoveCourse: courseSingle?.removeCourse,
+    };
   }
 );
+
 export const getIsLoading = createSelector(
   (state: RootState) => state.courseSingle.isLoading,
   (isLoading) => {

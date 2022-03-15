@@ -5,13 +5,6 @@ const auth = require("../midlleware/auth");
 const { validationResult } = require("express-validator/check");
 const { coursesValidators } = require("../utils/validators");
 
-router.get("/", auth, (req, res) => {
-  res.render("add", {
-    title: "Добавить курс",
-    isAdd: true,
-  });
-});
-
 router.post("/", auth, coursesValidators, async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

@@ -10,8 +10,11 @@ import Link from "next/link";
 import { NavLink } from "./elements";
 import { useAppDispatch } from "@core/hooks/redux";
 import { logout } from "@modules/auth/reducer/actions";
+import { getIsAuth } from "@modules/Auth/reducer/selectors";
+import { useSelector } from "react-redux";
 
 export const Header = () => {
+  const isAuth = useSelector(getIsAuth);
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {

@@ -9,6 +9,12 @@ export default class CoursesApi {
     return api.post<IEditCourseResponse>("courses/edit", params);
   }
 
+  static async addCourse(
+    params: ICourse
+  ): Promise<AxiosResponse<IEditCourseResponse>> {
+    return api.post<IEditCourseResponse>("courses/edit", params);
+  }
+
   static async removeCourse(id: {
     id: { id: string };
   }): Promise<AxiosResponse<IEditCourseResponse>> {

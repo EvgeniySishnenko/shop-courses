@@ -1,6 +1,6 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -21,6 +21,8 @@ export const Header = () => {
     dispatch(logout());
   };
 
+  const visibleItemMenu = isAuth ? "auth" : "";
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -29,26 +31,38 @@ export const Header = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+            sx={{ width: "100px" }}
           >
             LOGO
           </Typography>
-          <Box sx={{ display: "flex" }}>
-            {navList.map(({ link, title }) => (
-              <Link href={link} key={title}>
-                <NavLink>{title}</NavLink>
-              </Link>
-            ))}
-            <Button
-              onClick={handleLogout}
-              sx={{ color: "white", textTransform: "none" }}
-            >
-              Выйти
-            </Button>
-            <Link href={"/auth/login"}>
-              <NavLink>Вход</NavLink>
-            </Link>
-          </Box>
+          <Grid container justifyContent="space-between">
+            <Grid sx={{ display: "flex" }} item>
+              {navList.map(({ link, title, visible }) => {
+                return (
+                  (visible.includes(visibleItemMenu) ||
+                    visible.includes("all")) && (
+                    <Link href={link} key={title}>
+                      <NavLink>{title}</NavLink>
+                    </Link>
+                  )
+                );
+              })}
+            </Grid>
+            <Grid item>
+              {isAuth ? (
+                <Button
+                  onClick={handleLogout}
+                  sx={{ color: "white", textTransform: "none" }}
+                >
+                  Выйти
+                </Button>
+              ) : (
+                <Link href={"/auth/login"}>
+                  <NavLink>Вход</NavLink>
+                </Link>
+              )}
+            </Grid>
+          </Grid>
         </Toolbar>
       </Container>
     </AppBar>

@@ -2,7 +2,7 @@ const keys = require("../keys");
 
 module.exports = function (email, link) {
   return {
-    from: '"Node js" <sticky.sisters@yandex.ru>',
+    from: '"Node js" <shop-courses@yandex.ru>',
     to: email,
     subject: `Активация на сайте ${keys.API_URL}`,
     text: "",

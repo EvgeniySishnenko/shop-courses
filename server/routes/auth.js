@@ -13,11 +13,11 @@ const UserController = require("../controllers/user-controller");
 const router = new Router();
 
 let transporter = nodemailer.createTransport({
-  host: "smtp.yandex.ru",
-  port: 465,
+  host: keys.SMTP_HOST,
+  port: keys.SMTP_PORT,
   auth: {
-    user: "sticky.sisters@yandex.ru",
-    pass: "Million2017",
+    user: keys.SMTP_USER,
+    pass: keys.SMTP_PASS,
   },
 });
 

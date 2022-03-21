@@ -6,7 +6,7 @@ module.exports = {
   JWT_REFRESH_SECRET: "ASDF345432GDSGDFfdghfdghfaeiuwkmo7p1gcc1ako",
   SMTP_HOST: "smtp.yandex.ru",
   SMTP_PORT: 465,
-  SMTP_USER: "sticky.sisters@yandex.ru",
+  SMTP_USER: "shop-courses@yandex.ru",
   SMTP_PASS: "Million2017",
   API_URL: "http://localhost:5000",
 };

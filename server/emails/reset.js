@@ -2,7 +2,7 @@ const keys = require("../keys");
 
 module.exports = function (email, token) {
   return {
-    from: "Восстановить пароль <sticky.sisters@yandex.ru>",
+    from: "Восстановить пароль <shop-courses@yandex.ru>",
     to: email,
     subject: "Восстановить пароль",
     text: "Восстановить пароль",

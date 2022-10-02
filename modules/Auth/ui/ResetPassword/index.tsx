@@ -25,10 +25,8 @@ const ResetPwd: FC = () => {
   const {
     query: { slug },
   } = useRouter();
-  const router = useRouter();
-  const handleSubmitForm = (data: TResetPwdParams) => {
-    console.log(router);
 
+  const handleSubmitForm = (data: TResetPwdParams) => {
     dispatch(resetPwd(Object.assign(data, { token: slug })));
   };
 

@@ -21,8 +21,8 @@ api.interceptors.request.use(
   async (err) => {
     const originalRequest = err.config;
 
-    if (err.response.status == 401 && err.config && !err.config._isRety) {
-      originalRequest._isRety = true;
+    if (err.response.status == 401 && err.config && !err.config._isRetry) {
+      originalRequest._isRetry = true;
       try {
         const response = await axios.get<AuthResponse>(
           `${API_URL}/auth/refresh`,

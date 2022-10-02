@@ -6,7 +6,7 @@ module.exports = {
   JWT_REFRESH_SECRET: "ASDF345432GDSGDFfdghfdghfaeiuwkmo7p1gcc1ako",
   SMTP_HOST: "smtp.yandex.ru",
   SMTP_PORT: 465,
-  SMTP_USER: "shop-courses@yandex.ru",
-  SMTP_PASS: "Million2017",
+  SMTP_USER: "нужно указать почту", // лежит в папке _pwd
+  SMTP_PASS: "нужно указать пароль", // лежит в папке _pwd
   API_URL: "http://localhost:5000",
 };
